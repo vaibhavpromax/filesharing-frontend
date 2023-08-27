@@ -15,7 +15,7 @@ function App() {
 
   const getSession = async () => {
     axios
-      .get("http://localhost:3000/files/get-session")
+      .get(`${process.env.REACT_APP_BACKEND_URL}/files/get-session`)
       .then((response) => {
         setUploadUrl(response?.data?.uploadUrl);
         setSessionInfo(response?.data?.newFileData);
@@ -30,7 +30,7 @@ function App() {
   }, []);
 
   const handleFileUploaded = async (name, type) => {
-    const patchUrl = `http://localhost:3000/files/markUploaded?machine_id=${sessionInfo?.machineid}&file_name=${name}&file_type=${type}`;
+    const patchUrl = `${process.env.REACT_APP_BACKEND_URL}/files/markUploaded?machine_id=${sessionInfo?.machineid}&file_name=${name}&file_type=${type}`;
     axios
       .patch(patchUrl)
       .then((response) => {
